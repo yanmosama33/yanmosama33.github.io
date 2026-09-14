@@ -1,0 +1,336 @@
+/* =========================================================
+   夜空蓝主题自定义样式（Night Sky Blue）
+   用于覆盖 Butterfly 默认配色，通过 inject.head 引入
+   文件位置：source/css/custom.css  →  编译后 /css/custom.css
+   说明：绝不修改 node_modules/hexo-theme-butterfly 源码
+   ---------------------------------------------------------
+   配色方案：
+     主色夜空蓝   #2B4B7A     次级亮蓝   #3D6A9E
+     柔蓝(链接)   #5B7DB1     星光金(悬停) #FFB340
+     页面背景     #EDF2FA    卡片背景   #F5F8FD
+   ========================================================= */
+
+/* ---------- 1. 全局主题色变量（覆盖 :root）---------- */
+:root {
+  --theme-color: #2B4B7A;
+  --theme-color-light: #3D6A9E;
+  --theme-hover: #FFB340;
+
+  /* 页面与卡片背景 */
+  --global-bg: #EDF2FA;      /* 整页背景：淡蓝灰 */
+  --card-bg: #F5F8FD;        /* 卡片背景：微蓝白 */
+  --sidebar-bg: #EAF0F8;     /* 侧边栏背景 */
+
+  /* 按钮 / 悬停 */
+  --btn-bg: #2B4B7A;
+  --btn-hover-color: #FFB340;
+  --pseudo-hover: #FFB340;
+  --default-bg-color: #2B4B7A;
+  --text-bg-hover: rgba(43, 75, 122, .12);
+
+  /* 滚动条 / 分隔线 */
+  --scrollbar-color: #2B4B7A;
+  --hr-border: #D5E0EF;
+  --hr-before-color: #A3C2E3;
+}
+
+/* ---------- 2. 深色模式（夜空深蓝）---------- */
+[data-theme='dark'] {
+  --theme-color: #5B8FD9;
+  --global-bg: #0F1A2E;
+  --card-bg: #16243D;
+  --sidebar-bg: #101C30;
+  --btn-bg: #2B4B7A;
+  --btn-hover-color: #FFB340;
+  --scrollbar-color: #3D6A9E;
+}
+
+/* ---------- 3. 链接颜色与悬停 ---------- */
+a {
+  color: #5B7DB1;
+}
+
+a:hover {
+  color: #FFB340;
+}
+
+/* 正文内容里的链接用更深的夜空蓝，保证可读性 */
+#article-container a,
+#post-content a {
+  color: #2B4B7A;
+}
+
+#article-container a:hover,
+#post-content a:hover {
+  color: #FFB340;
+}
+
+/* ---------- 4. 文字选区 ---------- */
+*::selection {
+  background: #3D6A9E;
+  color: #fff;
+}
+
+/* ---------- 5. 引用块左边框 ---------- */
+blockquote {
+  border-left: 4px solid #2B4B7A;
+}
+
+/* ---------- 6. 列表小圆点（分类列表等）---------- */
+.list-beauty li:before,
+.category-lists ul li:before {
+  border: 0.215em solid #2B4B7A;
+}
+
+/* ---------- 7. 归档/时间线圆点 ---------- */
+.article-sort-title:before {
+  border: 5px solid #2B4B7A;
+}
+
+.article-sort-item:before {
+  border: 3px solid #2B4B7A;
+}
+
+.article-sort-item.year:hover:before {
+  border-color: #FFB340;
+}
+
+/* ---------- 8. TOC 目录激活项 / 分页当前页 ---------- */
+#aside-content #card-toc .toc-content .toc-link.active {
+  background: #2B4B7A;
+}
+
+#pagination .page-number.current {
+  background: #2B4B7A;
+}
+
+.search-dialog .ais-Pagination .ais-Pagination-item--selected .ais-Pagination-link {
+  background: #2B4B7A;
+}
+
+/* ---------- 9. 置顶标记 / 评论切换 / 代码工具 hover ---------- */
+#recent-posts .recent-post-item > .recent-post-info > .article-title .sticky {
+  color: #FFB340;
+}
+
+#post-comment .comment-head .comment-switch .second-comment {
+  color: #FFB340;
+}
+
+#post-comment.move #switch-btn {
+  background-color: #FFB340;
+}
+
+.container .highlight-tools i:hover {
+  color: #FFB340;
+}
+
+/* ---------- 10. 卡片 hover 微光效果（可选美化）---------- */
+.card-widget:hover,
+#recent-posts > .recent-post-item:hover {
+  box-shadow: 0 3px 12px 4px rgba(43, 75, 122, .12);
+}
+
+/* =========================================================
+   番剧信息卡（动漫杂谈用）—— 见下方 HTML 模板
+   ========================================================= */
+.anime-info-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin: 16px 0 24px;
+  padding: 16px 20px;
+  background: #F5F8FD;
+  border: 1px solid #D5E0EF;
+  border-left: 4px solid #2B4B7A;
+  border-radius: 8px;
+}
+
+.anime-info-card .anime-cover {
+  flex: 0 0 96px;
+  width: 96px;
+  height: 136px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #EAF0F8;
+}
+
+.anime-info-card .anime-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.anime-info-card .anime-meta {
+  flex: 1;
+  min-width: 200px;
+}
+
+.anime-info-card .anime-title {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2B4B7A;
+}
+
+.anime-info-card .anime-row {
+  margin: 4px 0;
+  color: #4C4948;
+  line-height: 1.8;
+}
+
+.anime-info-card .anime-row .label {
+  display: inline-block;
+  min-width: 56px;
+  color: #858585;
+}
+
+.anime-info-card .score {
+  color: #FFB340;
+  font-weight: 700;
+}
+
+.anime-info-card .status-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: .85rem;
+  color: #fff;
+  background: #2B4B7A;
+}
+
+.anime-info-card .status-tag.watching {
+  background: #3D6A9E;
+}
+
+.anime-info-card .status-tag.completed {
+  background: #2B4B7A;
+}
+
+.anime-info-card .status-tag.plan {
+  background: #A3C2E3;
+  color: #2B4B7A;
+}
+
+/* =========================================================
+   以下为 2026-09-14 追加定制
+   ========================================================= */
+
+/* ---------- 首页 banner 大字：显示座右铭 ---------- */
+/* 左上角导航栏仍显示 config.title（烟莫sama），
+   此处仅把首页 banner 的大字替换为座右铭「得意看淡，失意看开」 */
+#site-info #site-title {
+  visibility: hidden;
+  position: relative;
+}
+
+#site-info #site-title::before {
+  content: "得意看淡，失意看开";
+  visibility: visible;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, .15);
+}
+
+/* ---------- 分类页头图动画：自下而上滑入 ---------- */
+/* 原 header-effect 为 translateY(-35px)→0（自上而下），
+   此处改为 translateY(35px)→0（自下而上），仅作用于分类页 */
+@keyframes header-effect-bottom-up {
+  0% {
+    transform: translateY(35px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+#body-wrap:has(#category) #page-header:not(.full_page) {
+  animation: header-effect-bottom-up 1s;
+}
+
+/* ---------- 头像：移除旋转，改为 hover 稍微放大 ---------- */
+.avatar-img:hover img {
+  transform: scale(1.1);
+}
+
+/* =========================================================
+   2026-09-14 追加：标题字体与头图配文 → 微软雅黑
+   （仅替换字体，字号与原来保持一致）
+   ========================================================= */
+h1, h2, h3, h4, h5, h6,
+#site-title,
+#site-subtitle,
+#post-info .post-title,
+.recent-post-info .article-title,
+.card-widget .item-headline {
+  font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+}
+
+/* =========================================================
+   2026-09-14 追加：头图 hover 平滑缩放显示完整图片
+   原理：JS（source/js/header-bg.js）把头图内联 background-image
+   转移到 <img> 层，默认放大成"裁剪填满"效果，hover 平滑缩小到
+   完整显示；留白处用同图模糊背景填充，避免突兀色块。
+   ========================================================= */
+.header-bg-layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #16243D;
+  pointer-events: none;
+}
+
+.header-bg-layer .header-bg-blur {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(18px) brightness(.55);
+  transform: scale(1.2);
+}
+
+.header-bg-layer .header-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(var(--header-bg-scale, 2.6));
+  will-change: transform;
+  opacity: 0; /* 缩放计算完成前先隐藏，避免加载时闪烁 */
+}
+
+/* 缩放计算完成后再显示并启用过渡，保证丝滑无跳变 */
+#page-header.bg-ready .header-bg-img {
+  opacity: 1;
+  transition: transform .7s cubic-bezier(.22, .61, .36, 1), opacity .35s ease;
+}
+
+#page-header:hover .header-bg-img {
+  transform: scale(1);
+}
+
+/* 文字压一层柔和遮罩，保证标题可读性 */
+.header-bg-layer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .25);
+}
+
